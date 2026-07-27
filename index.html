@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,26 @@
     <title>سَكينة | رفيقك اليومي للذكر والطمأنينة</title>
 
     <meta name="description"
-          content="سَكينة - تطبيق إسلامي يجمع القرآن والأذكار والأدعية والأذان والسبحة في مكان واحد.">
+        content="سَكينة — تطبيق إسلامي شامل للقرآن الكريم والأذكار والأذان والأدعية والسبحة وختمة القرآن.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <style>
+
+        :root {
+            --bg: #070b12;
+            --bg2: #0d1420;
+            --card: rgba(255,255,255,0.055);
+            --border: rgba(255,255,255,0.1);
+            --gold: #d8b36a;
+            --gold2: #f1d38c;
+            --text: #f5f1e8;
+            --muted: #9ca6b5;
+        }
 
         * {
             margin: 0;
@@ -17,413 +35,500 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --bg: #07111f;
-            --bg-light: #0c1b2d;
-            --card: rgba(255,255,255,0.06);
-            --border: rgba(255,255,255,0.10);
-            --gold: #d7b56d;
-            --gold-light: #f0d99b;
-            --text: #f5f7fa;
-            --muted: #aeb9c8;
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: Arial, Tahoma, sans-serif;
-            background:
-                radial-gradient(
-                    circle at top right,
-                    rgba(215,181,109,0.12),
-                    transparent 30%
-                ),
-                linear-gradient(
-                    135deg,
-                    #07111f,
-                    #0b1727 50%,
-                    #07111f
-                );
+            font-family: "Cairo", sans-serif;
             color: var(--text);
-            min-height: 100vh;
+            background:
+                radial-gradient(circle at 80% 0%, rgba(216,179,106,.12), transparent 30%),
+                radial-gradient(circle at 0% 60%, rgba(32,90,110,.12), transparent 30%),
+                var(--bg);
             overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: .025;
+            background-image:
+                url("https://www.transparenttextures.com/patterns/cubes.png");
+            z-index: -1;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: min(1180px, 92%);
+            margin: auto;
         }
 
         /* ================= HEADER ================= */
 
         header {
-            width: 100%;
-            padding: 22px 7%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 18px 0;
+            background: rgba(7,11,18,.68);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,.06);
+        }
+
+        .nav {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            position: relative;
-            z-index: 10;
+            align-items: center;
         }
 
         .logo {
             display: flex;
             align-items: center;
             gap: 12px;
-            font-size: 25px;
-            font-weight: bold;
-            color: var(--gold-light);
+            font-size: 22px;
+            font-weight: 900;
         }
 
         .logo-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(
-                135deg,
-                #d7b56d,
-                #8c6b32
-            );
-            color: #07111f;
-            font-size: 25px;
-            box-shadow:
-                0 10px 35px rgba(215,181,109,0.25);
+            width: 45px;
+            height: 45px;
+            display: grid;
+            place-items: center;
+            border-radius: 15px;
+            background: linear-gradient(135deg, var(--gold), #80602b);
+            color: #15100a;
+            box-shadow: 0 0 30px rgba(216,179,106,.2);
         }
 
-        nav {
+        .nav-links {
             display: flex;
-            gap: 28px;
-        }
-
-        nav a {
+            gap: 30px;
             color: var(--muted);
-            text-decoration: none;
-            transition: 0.3s;
+            font-size: 14px;
         }
 
-        nav a:hover {
-            color: var(--gold-light);
+        .nav-links a {
+            transition: .3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold2);
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            border: 1px solid rgba(216,179,106,.45);
+            border-radius: 100px;
+            color: var(--gold2);
+            font-size: 13px;
+            transition: .3s;
+        }
+
+        .nav-btn:hover {
+            background: var(--gold);
+            color: #111;
         }
 
         /* ================= HERO ================= */
 
         .hero {
-            min-height: 650px;
-            padding: 70px 7% 100px;
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 60px;
+            padding-top: 120px;
+            position: relative;
         }
 
-        .hero-content {
-            max-width: 650px;
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            gap: 80px;
+            align-items: center;
         }
 
         .badge {
-            display: inline-block;
-            padding: 10px 18px;
-            border: 1px solid rgba(215,181,109,0.3);
-            background: rgba(215,181,109,0.08);
-            color: var(--gold-light);
-            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            border-radius: 100px;
+            border: 1px solid rgba(216,179,106,.25);
+            background: rgba(216,179,106,.06);
+            color: var(--gold2);
+            font-size: 13px;
             margin-bottom: 25px;
         }
 
         .hero h1 {
-            font-size: clamp(48px, 7vw, 88px);
-            line-height: 1.05;
-            margin-bottom: 25px;
-            background: linear-gradient(
-                135deg,
-                #ffffff,
-                var(--gold-light)
-            );
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: clamp(48px, 7vw, 86px);
+            line-height: 1.1;
+            font-weight: 900;
+            letter-spacing: -2px;
         }
 
-        .hero h2 {
-            color: var(--gold);
-            font-size: 26px;
-            margin-bottom: 20px;
+        .hero h1 span {
+            color: var(--gold2);
+            text-shadow: 0 0 40px rgba(216,179,106,.2);
         }
 
         .hero p {
             color: var(--muted);
-            font-size: 19px;
+            font-size: 18px;
             line-height: 2;
-            margin-bottom: 35px;
+            margin: 25px 0 35px;
+            max-width: 600px;
         }
 
-        .buttons {
+        .hero-buttons {
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
         }
 
         .btn {
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            padding: 16px 28px;
-            border-radius: 15px;
-            font-size: 17px;
-            font-weight: bold;
-            transition: 0.3s;
+            padding: 15px 28px;
+            border-radius: 14px;
+            font-weight: 700;
+            transition: .35s;
             display: inline-flex;
             align-items: center;
             gap: 10px;
         }
 
         .btn-primary {
-            background: linear-gradient(
-                135deg,
-                var(--gold-light),
-                #b18b43
-            );
-            color: #07111f;
-            box-shadow:
-                0 15px 35px rgba(215,181,109,0.22);
+            background: linear-gradient(135deg, var(--gold2), var(--gold));
+            color: #17120a;
+            box-shadow: 0 10px 35px rgba(216,179,106,.18);
         }
 
         .btn-primary:hover {
             transform: translateY(-4px);
-            box-shadow:
-                0 20px 45px rgba(215,181,109,0.35);
+            box-shadow: 0 15px 45px rgba(216,179,106,.3);
         }
 
         .btn-secondary {
-            color: var(--text);
             border: 1px solid var(--border);
-            background: var(--card);
+            background: rgba(255,255,255,.04);
+            color: var(--text);
         }
 
         .btn-secondary:hover {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,.08);
+            transform: translateY(-4px);
         }
 
-        /* ================= APP MOCKUP ================= */
+        /* ================= PHONE MOCKUP ================= */
 
         .phone-area {
             position: relative;
-            width: 360px;
-            min-width: 300px;
-            height: 530px;
             display: flex;
-            align-items: center;
             justify-content: center;
         }
 
         .glow {
             position: absolute;
-            width: 320px;
-            height: 320px;
+            width: 350px;
+            height: 350px;
             border-radius: 50%;
             background: var(--gold);
-            filter: blur(110px);
-            opacity: 0.16;
+            filter: blur(130px);
+            opacity: .13;
         }
 
         .phone {
             position: relative;
-            width: 245px;
-            height: 485px;
-            padding: 12px;
-            border-radius: 38px;
-            background: #111b2a;
-            border: 2px solid rgba(255,255,255,0.2);
+            width: 285px;
+            height: 570px;
+            padding: 10px;
+            border-radius: 42px;
+            background: linear-gradient(145deg, #39414e, #080b10);
             box-shadow:
-                0 30px 80px rgba(0,0,0,0.5);
-            transform: rotate(4deg);
+                0 40px 100px rgba(0,0,0,.7),
+                inset 0 0 0 1px rgba(255,255,255,.12);
+            animation: float 5s ease-in-out infinite;
         }
 
         .phone-screen {
             height: 100%;
-            border-radius: 28px;
-            padding: 22px 15px;
+            border-radius: 34px;
+            overflow: hidden;
             background:
-                radial-gradient(
-                    circle at top,
-                    rgba(215,181,109,0.2),
-                    transparent 45%
-                ),
-                #091523;
+                linear-gradient(rgba(7,11,18,.25), rgba(7,11,18,.95)),
+                url("https://images.unsplash.com/photo-1519817650390-64a93db51149?auto=format&fit=crop&w=800&q=80")
+                center / cover;
+            padding: 28px 18px;
         }
 
-        .app-top {
-            text-align: center;
-            color: var(--gold-light);
-            font-size: 20px;
-            margin-bottom: 30px;
-        }
-
-        .prayer-card {
-            padding: 20px;
-            border-radius: 20px;
-            background: linear-gradient(
-                135deg,
-                rgba(215,181,109,0.2),
-                rgba(255,255,255,0.04)
-            );
-            border: 1px solid rgba(215,181,109,0.2);
-            margin-bottom: 15px;
-        }
-
-        .prayer-card small {
-            color: var(--muted);
-        }
-
-        .prayer-card h3 {
-            margin-top: 10px;
-            font-size: 24px;
-        }
-
-        .fake-item {
-            height: 55px;
-            margin-top: 12px;
-            border-radius: 15px;
-            background: rgba(255,255,255,0.06);
+        .phone-top {
             display: flex;
-            align-items: center;
-            padding: 0 15px;
+            justify-content: space-between;
+            color: var(--gold2);
+            font-size: 12px;
+            margin-bottom: 55px;
+        }
+
+        .phone-content {
+            text-align: center;
+        }
+
+        .phone-content h3 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .phone-content p {
+            color: #bfc4ca;
+            font-size: 12px;
+            line-height: 2;
+        }
+
+        .phone-card {
+            margin-top: 35px;
+            padding: 20px;
+            border-radius: 22px;
+            background: rgba(255,255,255,.08);
+            border: 1px solid rgba(255,255,255,.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .phone-card strong {
+            display: block;
+            color: var(--gold2);
+            margin-bottom: 8px;
+        }
+
+        @keyframes float {
+            0%,100% {
+                transform: translateY(0) rotate(2deg);
+            }
+
+            50% {
+                transform: translateY(-18px) rotate(-2deg);
+            }
+        }
+
+        /* ================= SECTION ================= */
+
+        section {
+            padding: 110px 0;
+        }
+
+        .section-head {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .section-head span {
+            color: var(--gold2);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .section-head h2 {
+            font-size: clamp(30px, 5vw, 48px);
+            margin-top: 12px;
+        }
+
+        .section-head p {
             color: var(--muted);
+            margin-top: 12px;
         }
 
         /* ================= FEATURES ================= */
 
-        .section {
-            padding: 80px 7%;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: 42px;
-            margin-bottom: 15px;
-        }
-
-        .section-title p {
-            color: var(--muted);
-            font-size: 18px;
-        }
-
         .features {
             display: grid;
-            grid-template-columns: repeat(
-                auto-fit,
-                minmax(220px, 1fr)
-            );
-            gap: 20px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
         }
 
         .feature {
-            padding: 30px 25px;
-            min-height: 210px;
-            border-radius: 24px;
-            background: var(--card);
+            padding: 30px;
+            min-height: 220px;
             border: 1px solid var(--border);
-            transition: 0.35s;
+            border-radius: 25px;
+            background: linear-gradient(
+                145deg,
+                rgba(255,255,255,.07),
+                rgba(255,255,255,.025)
+            );
+            transition: .4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature::before {
+            content: "";
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            right: -50px;
+            top: -50px;
+            border-radius: 50%;
+            background: var(--gold);
+            filter: blur(70px);
+            opacity: 0;
+            transition: .4s;
         }
 
         .feature:hover {
             transform: translateY(-8px);
-            border-color: rgba(215,181,109,0.4);
-            background: rgba(215,181,109,0.08);
+            border-color: rgba(216,179,106,.4);
+        }
+
+        .feature:hover::before {
+            opacity: .15;
         }
 
         .feature-icon {
-            font-size: 38px;
+            font-size: 36px;
             margin-bottom: 20px;
         }
 
         .feature h3 {
-            font-size: 22px;
-            margin-bottom: 12px;
-            color: var(--gold-light);
+            font-size: 20px;
+            margin-bottom: 10px;
         }
 
         .feature p {
             color: var(--muted);
+            line-height: 1.9;
+            font-size: 14px;
+        }
+
+        /* ================= QUOTE ================= */
+
+        .quote {
+            text-align: center;
+            padding: 75px 25px;
+            border-radius: 30px;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(216,179,106,.12),
+                    rgba(255,255,255,.03)
+                );
+            border: 1px solid rgba(216,179,106,.18);
+        }
+
+        .quote-icon {
+            font-size: 42px;
+            color: var(--gold2);
+            margin-bottom: 20px;
+        }
+
+        .quote h2 {
+            font-size: clamp(25px, 4vw, 42px);
             line-height: 1.8;
+        }
+
+        .quote p {
+            color: var(--muted);
+            margin-top: 20px;
         }
 
         /* ================= DOWNLOAD ================= */
 
-        .download {
-            margin: 30px 7% 100px;
-            padding: 70px 30px;
-            text-align: center;
-            border-radius: 32px;
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(215,181,109,0.16),
-                    rgba(255,255,255,0.04)
-                );
-            border: 1px solid rgba(215,181,109,0.2);
+        .download-box {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 40px;
+            align-items: center;
+            padding: 50px;
+            border-radius: 30px;
+            background: linear-gradient(
+                120deg,
+                rgba(216,179,106,.12),
+                rgba(255,255,255,.03)
+            );
+            border: 1px solid rgba(216,179,106,.2);
         }
 
-        .download h2 {
-            font-size: 40px;
-            margin-bottom: 20px;
+        .download-box h2 {
+            font-size: 36px;
+            margin-bottom: 12px;
         }
 
-        .download p {
+        .download-box p {
             color: var(--muted);
-            font-size: 18px;
-            margin-bottom: 30px;
+            line-height: 2;
         }
 
         /* ================= FOOTER ================= */
 
         footer {
-            padding: 30px 7%;
+            padding: 35px 0;
             border-top: 1px solid var(--border);
-            text-align: center;
             color: var(--muted);
+            text-align: center;
+            font-size: 13px;
         }
 
         footer strong {
-            color: var(--gold-light);
+            color: var(--gold2);
+        }
+
+        /* ================= REVEAL ANIMATION ================= */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 1s ease;
+        }
+
+        .reveal.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* ================= MOBILE ================= */
 
-        @media (max-width: 800px) {
+        @media (max-width: 850px) {
 
-            header {
-                padding: 18px 5%;
-            }
-
-            nav {
+            .nav-links {
                 display: none;
             }
 
             .hero {
-                padding: 50px 5% 80px;
-                flex-direction: column;
-                text-align: center;
+                padding-top: 130px;
             }
 
-            .buttons {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 55px;
+            }
+
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
                 justify-content: center;
             }
 
-            .phone-area {
-                transform: scale(0.9);
+            .features {
+                grid-template-columns: 1fr;
             }
 
-            .section {
-                padding: 60px 5%;
+            .download-box {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 35px 25px;
             }
 
-            .section-title h2 {
-                font-size: 32px;
-            }
-
-            .download {
-                margin-left: 5%;
-                margin-right: 5%;
+            .download-box .btn {
+                justify-content: center;
             }
         }
 
@@ -436,27 +541,39 @@
 
     <header>
 
-        <div class="logo">
+        <div class="container nav">
 
-            <div class="logo-icon">
-                🕌
-            </div>
+            <a href="#" class="logo">
 
-            سَكينة
+                <div class="logo-icon">
+                    🕌
+                </div>
+
+                <span>سَكينة</span>
+
+            </a>
+
+            <nav class="nav-links">
+
+                <a href="#features">
+                    المميزات
+                </a>
+
+                <a href="#about">
+                    عن التطبيق
+                </a>
+
+                <a href="#download">
+                    التحميل
+                </a>
+
+            </nav>
+
+            <a href="#download" class="nav-btn">
+                حمّل التطبيق
+            </a>
 
         </div>
-
-        <nav>
-
-            <a href="#features">
-                المميزات
-            </a>
-
-            <a href="#download">
-                تحميل التطبيق
-            </a>
-
-        </nav>
 
     </header>
 
@@ -467,94 +584,112 @@
 
         <section class="hero">
 
-            <div class="hero-content">
+            <div class="container hero-grid">
 
-                <span class="badge">
-                    ✨ رفيقك اليومي للسكينة والذكر
-                </span>
+                <div class="reveal">
 
-                <h1>
-                    سَكينة
-                </h1>
+                    <div class="badge">
+                        ✨ رفيقك اليومي للطمأنينة
+                    </div>
 
-                <h2>
-                    كل ما يقربك إلى الله في مكان واحد
-                </h2>
+                    <h1>
+                        خذ لحظة من يومك...
+                        <br>
+                        <span>واطمئن.</span>
+                    </h1>
 
-                <p>
-                    تطبيق إسلامي بسيط وهادئ يجمع القرآن الكريم،
-                    الأذكار، الأدعية، الأذان، مواقيت الصلاة،
-                    والسبحة الإلكترونية في تجربة واحدة.
-                </p>
+                    <p>
+                        سَكينة يجمع لك القرآن الكريم،
+                        الأذكار، الأذان، الأدعية، والعديد
+                        من الأدوات الإسلامية في تجربة هادئة
+                        ومميزة بين يديك.
+                    </p>
 
-                <div class="buttons">
+                    <div class="hero-buttons">
 
-                    <a
-                        href="#download"
-                        class="btn btn-primary"
-                    >
-                        📥 تحميل التطبيق
-                    </a>
+                        <a href="#download" class="btn btn-primary">
+                            📱 حمّل سَكينة الآن
+                        </a>
 
-                    <a
-                        href="#features"
-                        class="btn btn-secondary"
-                    >
-                        اكتشف سَكينة
-                    </a>
+                        <a href="#features" class="btn btn-secondary">
+                            اكتشف المميزات
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="phone-area reveal">
+
+                    <div class="glow"></div>
+
+                    <div class="phone">
+
+                        <div class="phone-screen">
+
+                            <div class="phone-top">
+                                <span>سَكينة</span>
+                                <span>🕌</span>
+                            </div>
+
+                            <div class="phone-content">
+
+                                <h3>
+                                    السلام عليكم
+                                </h3>
+
+                                <p>
+                                    اجعل يومك أكثر قربًا
+                                    وطمأنينة بذكر الله
+                                </p>
+
+                                <div class="phone-card">
+
+                                    <strong>
+                                        🕰️ الصلاة القادمة
+                                    </strong>
+
+                                    <p>
+                                        المغرب
+                                        <br>
+                                        متبقي 01:24:36
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
             </div>
 
+        </section>
 
-            <!-- APP MOCKUP -->
 
-            <div class="phone-area">
+        <!-- ================= QUOTE ================= -->
 
-                <div class="glow"></div>
+        <section id="about">
 
-                <div class="phone">
+            <div class="container">
 
-                    <div class="phone-screen">
+                <div class="quote reveal">
 
-                        <div class="app-top">
-                            سَكينة 🤍
-                        </div>
-
-                        <div class="prayer-card">
-
-                            <small>
-                                الصلاة القادمة
-                            </small>
-
-                            <h3>
-                                المغرب 🌇
-                            </h3>
-
-                            <small>
-                                متبقي 01:24:35
-                            </small>
-
-                        </div>
-
-                        <div class="fake-item">
-                            📖 القرآن الكريم
-                        </div>
-
-                        <div class="fake-item">
-                            📿 الأذكار
-                        </div>
-
-                        <div class="fake-item">
-                            🤲 الأدعية
-                        </div>
-
-                        <div class="fake-item">
-                            🕋 مواقيت الصلاة
-                        </div>
-
+                    <div class="quote-icon">
+                        ❝
                     </div>
+
+                    <h2>
+                        ألا بذكر الله تطمئن القلوب
+                    </h2>
+
+                    <p>
+                        سَكينة... مساحة صغيرة من الهدوء في عالم مزدحم.
+                    </p>
 
                 </div>
 
@@ -565,130 +700,135 @@
 
         <!-- ================= FEATURES ================= -->
 
-        <section
-            class="section"
-            id="features"
-        >
+        <section id="features">
 
-            <div class="section-title">
+            <div class="container">
 
-                <h2>
-                    كل ما تحتاجه في سَكينة
-                </h2>
+                <div class="section-head reveal">
 
-                <p>
-                    تجربة إسلامية هادئة ومتكاملة في تطبيق واحد
-                </p>
+                    <span>
+                        كل ما تحتاجه في مكان واحد
+                    </span>
 
-            </div>
-
-
-            <div class="features">
-
-                <div class="feature">
-
-                    <div class="feature-icon">
-                        📖
-                    </div>
-
-                    <h3>
-                        القرآن الكريم
-                    </h3>
+                    <h2>
+                        صُمّم ليكون جزءًا من يومك
+                    </h2>
 
                     <p>
-                        اقرأ واستمع إلى القرآن الكريم
-                        في أي وقت وأي مكان.
+                        أدوات إسلامية أساسية بتجربة بسيطة وهادئة.
                     </p>
 
                 </div>
 
 
-                <div class="feature">
+                <div class="features">
 
-                    <div class="feature-icon">
-                        📿
+                    <div class="feature reveal">
+
+                        <div class="feature-icon">
+                            📖
+                        </div>
+
+                        <h3>
+                            القرآن الكريم
+                        </h3>
+
+                        <p>
+                            اقرأ واستمع إلى القرآن الكريم
+                            في أي وقت وأي مكان.
+                        </p>
+
                     </div>
 
-                    <h3>
-                        الأذكار
-                    </h3>
 
-                    <p>
-                        أذكار الصباح والمساء والنوم
-                        لتبقى قريبًا من الذكر.
-                    </p>
+                    <div class="feature reveal">
 
-                </div>
+                        <div class="feature-icon">
+                            🤲
+                        </div>
 
+                        <h3>
+                            الأذكار
+                        </h3>
 
-                <div class="feature">
+                        <p>
+                            أذكار الصباح والمساء والنوم
+                            لتبقى قريبًا من الذكر.
+                        </p>
 
-                    <div class="feature-icon">
-                        🕌
                     </div>
 
-                    <h3>
-                        الأذان ومواقيت الصلاة
-                    </h3>
 
-                    <p>
-                        اعرف مواقيت الصلاة واحصل على
-                        تنبيهات الأذان في الوقت المناسب.
-                    </p>
+                    <div class="feature reveal">
 
-                </div>
+                        <div class="feature-icon">
+                            🕌
+                        </div>
 
+                        <h3>
+                            الأذان ومواقيت الصلاة
+                        </h3>
 
-                <div class="feature">
+                        <p>
+                            اعرف مواقيت الصلاة واحصل على
+                            تنبيهات الأذان في الوقت المناسب.
+                        </p>
 
-                    <div class="feature-icon">
-                        🤲
                     </div>
 
-                    <h3>
-                        الأدعية
-                    </h3>
 
-                    <p>
-                        مجموعة من الأدعية المختارة
-                        لحياتك اليومية.
-                    </p>
+                    <div class="feature reveal">
 
-                </div>
+                        <div class="feature-icon">
+                            💛
+                        </div>
 
+                        <h3>
+                            الأدعية
+                        </h3>
 
-                <div class="feature">
+                        <p>
+                            مجموعة من الأدعية التي يمكنك
+                            الرجوع إليها وقتما شئت.
+                        </p>
 
-                    <div class="feature-icon">
-                        🔢
                     </div>
 
-                    <h3>
-                        السبحة الإلكترونية
-                    </h3>
 
-                    <p>
-                        سبّح واذكر الله بسهولة
-                        في أي وقت.
-                    </p>
+                    <div class="feature reveal">
 
-                </div>
+                        <div class="feature-icon">
+                            📿
+                        </div>
 
+                        <h3>
+                            السبحة الإلكترونية
+                        </h3>
 
-                <div class="feature">
+                        <p>
+                            سبّح واذكر الله بسهولة
+                            في أي وقت.
+                        </p>
 
-                    <div class="feature-icon">
-                        🌙
                     </div>
 
-                    <h3>
-                        ختمة القرآن
-                    </h3>
 
-                    <p>
-                        تابع تقدمك وأنشئ ختمتك
-                        واستمر في طريقك.
-                    </p>
+                    <div class="feature reveal">
+
+                        <div class="feature-icon">
+                            📚
+                        </div>
+
+                        <h3>
+                            ختمة القرآن
+                        </h3>
+
+                        <p>
+                            تابع تقدمك وأنشئ خطتك الخاصة
+                            لختم القرآن الكريم.
+                        </p>
+
+                    </div>
 
                 </div>
 
@@ -699,28 +839,34 @@
 
         <!-- ================= DOWNLOAD ================= -->
 
-        <section
-            class="download"
-            id="download"
-        >
+        <section id="download">
 
-            <h2>
-                ابدأ رحلتك مع سَكينة 🤍
-            </h2>
+            <div class="container">
 
-            <p>
-                حمّل التطبيق واجعل الذكر جزءًا من يومك.
-            </p>
+                <div class="download-box reveal">
 
-            <!-- هنحط رابط APK هنا بعدين -->
+                    <div>
 
-            <a
-                href="#"
-                class="btn btn-primary"
-                onclick="alert('سيتم إضافة رابط تحميل التطبيق قريبًا 🤍')"
-            >
-                📥 تحميل سَكينة
-            </a>
+                        <h2>
+                            خليك أقرب للطمأنينة 🤍
+                        </h2>
+
+                        <p>
+                            حمّل تطبيق سَكينة وابدأ رحلتك
+                            مع القرآن والذكر والصلاة.
+                        </p>
+
+                    </div>
+
+                    <!-- غيّر الرابط هنا لاحقًا لرابط APK -->
+
+                    <a href="#" class="btn btn-primary" id="downloadBtn">
+                        📥 تحميل التطبيق
+                    </a>
+
+                </div>
+
+            </div>
 
         </section>
 
@@ -731,17 +877,20 @@
 
     <footer>
 
-        جميع الحقوق محفوظة ©
-        <strong>
-            سَكينة
-        </strong>
+        <div class="container">
 
-        <br>
+            صُنع بـ 🤍 ليكون يومك أكثر <strong>سَكينة</strong>
 
-        تطبيق إسلامي من أجل حياة أكثر طمأنينة 🤍
+            <br><br>
+
+            © 2026 سَكينة — جميع الحقوق محفوظة
+
+        </div>
 
     </footer>
 
-</body>
 
-</html>
+    <script>
+
+        // ===============================
+        // Scroll
