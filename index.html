@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +8,9 @@
     <title>سكينة | كل ما تحتاجه من قرآن وذكر وطمأنينة</title>
 
     <meta name="description"
-          content="سكينة — كل ما تحتاجه من قرآن وذكر وطمأنينة. مواقيت الصلاة، الأذان، القرآن الكريم، الأذكار والأدعية في تطبيق واحد.">
+          content="سكينة — رفيقك اليومي للقرآن والأذكار والأدعية ومواقيت الصلاة والطمأنينة.">
 
-    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="icon" href="icon.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,27 +21,23 @@
     <style>
 
         :root {
-            --background: #080b0d;
-            --background-2: #0d1215;
-            --surface: #11181c;
-            --surface-2: #162126;
+            --bg: #070a0e;
+            --bg-2: #0c1118;
+            --surface: #111820;
+            --surface-2: #151e28;
 
-            --gold: #d4ae5a;
-            --gold-light: #f0d995;
-            --gold-dark: #9b7734;
+            --gold: #c9a85b;
+            --gold-light: #ead18a;
 
-            --green: #8cc5a7;
-            --green-dark: #477866;
+            --green: #76b89d;
+            --green-dark: #29483e;
 
-            --white: #f7f4ec;
-            --muted: #9da7aa;
-            --muted-2: #6d777a;
+            --white: #f5f3ed;
+            --text: #dfe3e5;
+            --muted: #8f9aa3;
 
-            --border: rgba(255,255,255,.08);
-            --gold-border: rgba(212,174,90,.22);
-
-            --shadow:
-                0 30px 90px rgba(0,0,0,.45);
+            --line: rgba(255,255,255,.08);
+            --gold-line: rgba(201,168,91,.22);
 
             --radius: 26px;
         }
@@ -59,112 +56,82 @@
             min-height: 100vh;
             overflow-x: hidden;
 
+            color: var(--text);
             background:
                 radial-gradient(
-                    ellipse at 80% 0%,
-                    rgba(212,174,90,.12),
+                    circle at 50% -10%,
+                    rgba(201,168,91,.12),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 100% 50%,
+                    rgba(71,130,105,.08),
                     transparent 30%
                 ),
+                var(--bg);
 
-                radial-gradient(
-                    ellipse at 0% 45%,
-                    rgba(75,130,108,.08),
-                    transparent 32%
-                ),
-
-                var(--background);
-
-            color: var(--white);
             font-family: "Cairo", sans-serif;
         }
 
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
+        body::before {
+            content: "";
 
-        img {
-            max-width: 100%;
-            display: block;
+            position: fixed;
+            inset: 0;
+
+            pointer-events: none;
+
+            opacity: .22;
+
+            background-image:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,.018) 25%,
+                    transparent 25%
+                ),
+                linear-gradient(
+                    315deg,
+                    rgba(255,255,255,.018) 25%,
+                    transparent 25%
+                );
+
+            background-size: 70px 70px;
+
+            z-index: -1;
         }
 
         .container {
-            width: min(1180px, calc(100% - 36px));
+            width: min(1160px, calc(100% - 40px));
             margin: auto;
-        }
-
-        /* =========================
-           BACKGROUND
-        ========================= */
-
-        .ambient {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .ambient span {
-            position: absolute;
-            display: block;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: .18;
-            animation: float 12s ease-in-out infinite alternate;
-        }
-
-        .ambient span:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            background: var(--gold-dark);
-            top: -150px;
-            right: 15%;
-        }
-
-        .ambient span:nth-child(2) {
-            width: 240px;
-            height: 240px;
-            background: var(--green-dark);
-            bottom: 10%;
-            left: -120px;
-            animation-delay: 2s;
-        }
-
-        @keyframes float {
-            from {
-                transform: translate(0, 0);
-            }
-
-            to {
-                transform: translate(35px, 25px);
-            }
         }
 
         /* =========================
            NAVBAR
         ========================= */
 
-        .navbar {
+        nav {
             position: fixed;
+
             top: 0;
             left: 0;
-            right: 0;
+
+            width: 100%;
+
+            padding: 20px 0;
 
             z-index: 1000;
-
-            padding: 18px 0;
 
             transition: .35s ease;
         }
 
-        .navbar.scrolled {
-            background: rgba(8,11,13,.78);
-            backdrop-filter: blur(22px);
-            border-bottom: 1px solid var(--border);
+        nav.scrolled {
+            background: rgba(7,10,14,.84);
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid var(--line);
         }
 
-        .nav-content {
+        .nav-inner {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -175,34 +142,41 @@
             align-items: center;
             gap: 12px;
 
+            color: var(--white);
+            text-decoration: none;
+
             font-size: 23px;
             font-weight: 900;
         }
 
         .brand img {
-            width: 48px;
-            height: 48px;
+            width: 47px;
+            height: 47px;
 
             object-fit: cover;
 
             border-radius: 15px;
 
             box-shadow:
-                0 0 0 1px var(--gold-border),
-                0 10px 30px rgba(0,0,0,.35);
+                0 0 0 1px var(--gold-line),
+                0 8px 25px rgba(0,0,0,.35);
         }
 
         .nav-links {
             display: flex;
             align-items: center;
             gap: 28px;
-
-            color: var(--muted);
-            font-size: 14px;
         }
 
         .nav-links a {
-            transition: .25s ease;
+            color: var(--muted);
+
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            transition: .25s;
         }
 
         .nav-links a:hover {
@@ -210,36 +184,28 @@
         }
 
         .nav-download {
-            display: flex;
+            display: inline-flex;
             align-items: center;
             gap: 8px;
 
-            padding: 11px 18px;
+            padding: 11px 19px;
 
-            border-radius: 14px;
+            color: #10130f;
+            background: var(--gold-light);
 
-            color: #17130b;
+            border-radius: 13px;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    var(--gold-light),
-                    var(--gold)
-                );
+            text-decoration: none;
 
             font-size: 13px;
             font-weight: 800;
 
-            box-shadow:
-                0 12px 30px rgba(212,174,90,.14);
-
-            transition: .3s ease;
+            transition: .25s;
         }
 
         .nav-download:hover {
             transform: translateY(-2px);
-            box-shadow:
-                0 16px 38px rgba(212,174,90,.22);
+            box-shadow: 0 8px 25px rgba(201,168,91,.18);
         }
 
         /* =========================
@@ -247,38 +213,19 @@
         ========================= */
 
         .hero {
-            min-height: 100vh;
+            min-height: 850px;
 
-            display: flex;
-            align-items: center;
-
-            padding:
-                150px
-                0
-                90px;
-        }
-
-        .hero-grid {
             display: grid;
             grid-template-columns: 1.05fr .95fr;
+
             align-items: center;
-            gap: 80px;
+            gap: 70px;
+
+            padding-top: 125px;
         }
 
         .hero-content {
-            animation: reveal .9s ease both;
-        }
-
-        @keyframes reveal {
-            from {
-                opacity: 0;
-                transform: translateY(25px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            animation: fadeUp .8s ease both;
         }
 
         .eyebrow {
@@ -288,84 +235,79 @@
 
             padding: 8px 13px;
 
-            margin-bottom: 22px;
-
-            border: 1px solid var(--gold-border);
-            border-radius: 999px;
-
             color: var(--gold-light);
+            background: rgba(201,168,91,.07);
 
-            background: rgba(212,174,90,.06);
+            border: 1px solid var(--gold-line);
+            border-radius: 100px;
 
             font-size: 12px;
             font-weight: 700;
+
+            margin-bottom: 24px;
         }
 
-        .eyebrow::before {
-            content: "";
+        .eyebrow span {
             width: 7px;
             height: 7px;
 
             border-radius: 50%;
 
             background: var(--green);
-
-            box-shadow:
-                0 0 12px var(--green);
+            box-shadow: 0 0 14px var(--green);
         }
 
         h1 {
-            max-width: 650px;
+            color: var(--white);
 
-            margin-bottom: 20px;
+            font-size: clamp(48px, 6vw, 82px);
+            line-height: 1.12;
+            font-weight: 900;
 
-            font-size: clamp(42px, 6vw, 78px);
-            line-height: 1.15;
-            letter-spacing: -2px;
+            letter-spacing: -3px;
+
+            margin-bottom: 24px;
         }
 
-        h1 span {
+        h1 strong {
+            display: block;
+
             color: var(--gold-light);
+
+            font-family: "Amiri", serif;
+            font-weight: 700;
         }
 
         .hero-description {
-            max-width: 570px;
-
-            margin-bottom: 34px;
+            max-width: 540px;
 
             color: var(--muted);
 
-            font-size: 17px;
+            font-size: 18px;
             line-height: 2;
+
+            margin-bottom: 34px;
         }
 
         .hero-buttons {
             display: flex;
-            flex-wrap: wrap;
+            align-items: center;
             gap: 14px;
+
+            flex-wrap: wrap;
         }
 
-        .primary-button,
-        .secondary-button {
+        .primary-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
 
-            min-height: 54px;
+            min-width: 175px;
 
-            padding: 0 24px;
+            padding: 15px 24px;
 
-            border-radius: 16px;
-
-            font-size: 14px;
-            font-weight: 800;
-
-            transition: .3s ease;
-        }
-
-        .primary-button {
-            color: #18130a;
+            color: #0a0d0c;
 
             background:
                 linear-gradient(
@@ -374,283 +316,268 @@
                     var(--gold)
                 );
 
+            border-radius: 15px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 900;
+
             box-shadow:
-                0 18px 40px rgba(212,174,90,.15);
+                0 15px 35px rgba(201,168,91,.12);
+
+            transition: .3s ease;
         }
 
-        .primary-button:hover {
+        .primary-btn:hover {
             transform: translateY(-4px);
+
             box-shadow:
-                0 24px 50px rgba(212,174,90,.25);
+                0 20px 45px rgba(201,168,91,.22);
         }
 
-        .secondary-button {
-            border: 1px solid var(--border);
-            color: var(--white);
+        .secondary-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 14px 22px;
+
+            color: var(--text);
+
+            border: 1px solid var(--line);
+            border-radius: 15px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            transition: .3s;
+        }
+
+        .secondary-btn:hover {
+            color: var(--gold-light);
+            border-color: var(--gold-line);
+
             background: rgba(255,255,255,.035);
-        }
-
-        .secondary-button:hover {
-            transform: translateY(-4px);
-            border-color: var(--gold-border);
-            background: rgba(255,255,255,.07);
         }
 
         /* =========================
            APP PREVIEW
         ========================= */
 
-        .preview-area {
-            position: relative;
-
-            min-height: 540px;
-
+        .hero-visual {
             display: flex;
-            align-items: center;
             justify-content: center;
-        }
 
-        .preview-glow {
-            position: absolute;
-
-            width: 420px;
-            height: 420px;
-
-            border-radius: 50%;
-
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(212,174,90,.20),
-                    transparent 65%
-                );
-
-            filter: blur(10px);
+            animation: floatIn 1s ease both;
         }
 
         .phone {
             position: relative;
-            z-index: 2;
 
             width: 285px;
-            min-height: 530px;
+            height: 570px;
 
-            padding: 13px;
-
-            border-radius: 38px;
+            padding: 10px;
 
             background:
                 linear-gradient(
                     145deg,
-                    #303b40,
-                    #101619 55%,
-                    #080b0d
+                    #343b43,
+                    #0c1015 35%,
+                    #242c34
                 );
 
-            border: 1px solid rgba(255,255,255,.14);
+            border-radius: 43px;
 
             box-shadow:
-                0 35px 80px rgba(0,0,0,.55),
-                0 0 0 8px rgba(255,255,255,.025);
+                0 35px 90px rgba(0,0,0,.55),
+                0 0 0 1px rgba(255,255,255,.09);
 
             transform: rotate(0deg);
 
-            animation: phoneFloat 5s ease-in-out infinite;
+            transition: .5s ease;
         }
 
-        @keyframes phoneFloat {
-            0%,100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-12px);
-            }
+        .phone:hover {
+            transform: translateY(-10px);
         }
 
         .phone-screen {
-            min-height: 504px;
+            position: relative;
 
-            padding: 20px 16px;
+            width: 100%;
+            height: 100%;
 
             overflow: hidden;
 
-            border-radius: 28px;
+            padding: 21px 17px;
+
+            border-radius: 34px;
 
             background:
                 linear-gradient(
                     160deg,
-                    #172126,
-                    #0b1013
+                    #101820,
+                    #080b10
                 );
         }
 
-        .phone-top {
+        .phone-notch {
+            position: absolute;
+
+            top: 0;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            width: 105px;
+            height: 25px;
+
+            border-radius: 0 0 18px 18px;
+
+            background: #050608;
+        }
+
+        .phone-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
 
-            margin-bottom: 28px;
-
-            color: var(--muted);
-            font-size: 11px;
+            margin-top: 23px;
+            margin-bottom: 22px;
         }
 
-        .phone-brand {
-            color: var(--gold-light);
-            font-weight: 800;
-        }
+        .phone-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
 
-        .prayer-card {
-            padding: 20px;
+            color: var(--white);
 
-            border: 1px solid var(--gold-border);
-            border-radius: 22px;
-
-            background:
-                linear-gradient(
-                    145deg,
-                    rgba(212,174,90,.13),
-                    rgba(255,255,255,.025)
-                );
-
-            box-shadow:
-                0 20px 45px rgba(0,0,0,.25);
-        }
-
-        .prayer-label {
-            margin-bottom: 10px;
-
-            color: var(--muted);
-            font-size: 11px;
-        }
-
-        .prayer-name {
-            margin-bottom: 12px;
-
-            color: var(--gold-light);
-
-            font-size: 25px;
+            font-size: 16px;
             font-weight: 900;
         }
 
-        .prayer-time {
+        .phone-logo img {
+            width: 31px;
+            height: 31px;
+
+            border-radius: 10px;
+        }
+
+        .phone-date {
+            color: var(--muted);
+            font-size: 9px;
+        }
+
+        .welcome-card {
+            padding: 17px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(201,168,91,.17),
+                    rgba(201,168,91,.035)
+                );
+
+            border: 1px solid var(--gold-line);
+            border-radius: 20px;
+
+            margin-bottom: 13px;
+        }
+
+        .welcome-card small {
+            color: var(--gold-light);
+            font-size: 9px;
+        }
+
+        .welcome-card h3 {
             color: var(--white);
 
-            font-size: 14px;
+            font-family: "Amiri", serif;
+
+            font-size: 22px;
+
+            margin-top: 6px;
         }
 
-        .countdown {
-            margin-top: 20px;
-            padding-top: 15px;
+        .next-prayer {
+            padding: 16px;
 
-            border-top: 1px solid var(--border);
+            background: rgba(118,184,157,.08);
 
+            border: 1px solid rgba(118,184,157,.18);
+            border-radius: 19px;
+
+            margin-bottom: 15px;
+        }
+
+        .next-prayer small {
             color: var(--green);
-
-            font-size: 14px;
-            font-weight: 700;
+            font-size: 9px;
         }
 
-        .mini-list {
+        .next-prayer strong {
+            display: block;
+
+            color: var(--white);
+
+            font-size: 17px;
+
+            margin: 5px 0;
+        }
+
+        .next-prayer span {
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        .prayer-list {
             display: grid;
-            gap: 9px;
-
-            margin-top: 18px;
+            gap: 8px;
         }
 
-        .mini-item {
+        .prayer-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
 
-            padding: 12px 13px;
-
-            border: 1px solid var(--border);
-            border-radius: 14px;
+            padding: 10px 12px;
 
             background: rgba(255,255,255,.035);
 
+            border: 1px solid rgba(255,255,255,.05);
+            border-radius: 13px;
+        }
+
+        .prayer-item span {
             color: var(--muted);
-
-            font-size: 11px;
-        }
-
-        .mini-item strong {
-            color: var(--white);
-        }
-
-        .floating-card {
-            position: absolute;
-            z-index: 3;
-
-            display: flex;
-            align-items: center;
-            gap: 12px;
-
-            padding: 14px 16px;
-
-            border: 1px solid var(--border);
-            border-radius: 18px;
-
-            background:
-                rgba(17,24,28,.86);
-
-            backdrop-filter: blur(16px);
-
-            box-shadow: var(--shadow);
-
-            animation: floatingCard 4s ease-in-out infinite alternate;
-        }
-
-        .floating-card:first-of-type {
-            top: 80px;
-            right: 0;
-        }
-
-        .floating-card:last-of-type {
-            bottom: 70px;
-            left: 0;
-
-            animation-delay: 1.2s;
-        }
-
-        @keyframes floatingCard {
-            from {
-                transform: translateY(0);
-            }
-
-            to {
-                transform: translateY(-10px);
-            }
-        }
-
-        .floating-icon {
-            width: 38px;
-            height: 38px;
-
-            display: grid;
-            place-items: center;
-
-            border-radius: 12px;
-
-            background: rgba(212,174,90,.12);
-
-            font-size: 18px;
-        }
-
-        .floating-card small {
-            display: block;
-
-            margin-bottom: 3px;
-
-            color: var(--muted-2);
-
             font-size: 10px;
         }
 
-        .floating-card strong {
-            font-size: 12px;
+        .prayer-item strong {
+            color: var(--gold-light);
+            font-size: 11px;
+        }
+
+        .phone-glow {
+            position: absolute;
+
+            width: 260px;
+            height: 260px;
+
+            background: var(--gold);
+
+            opacity: .08;
+
+            filter: blur(90px);
+
+            border-radius: 50%;
+
+            z-index: -1;
         }
 
         /* =========================
@@ -658,7 +585,7 @@
         ========================= */
 
         section {
-            padding: 110px 0;
+            padding: 105px 0;
         }
 
         .section-heading {
@@ -667,27 +594,31 @@
             margin-bottom: 48px;
         }
 
-        .section-heading small {
+        .section-heading span {
             display: block;
 
-            margin-bottom: 12px;
+            color: var(--gold);
 
-            color: var(--gold-light);
-
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 800;
+
+            margin-bottom: 12px;
         }
 
         .section-heading h2 {
-            margin-bottom: 14px;
+            color: var(--white);
 
-            font-size: clamp(30px, 4vw, 48px);
+            font-size: clamp(30px, 4vw, 47px);
+            line-height: 1.35;
+            font-weight: 900;
         }
 
         .section-heading p {
             color: var(--muted);
 
-            line-height: 2;
+            line-height: 1.9;
+
+            margin-top: 15px;
         }
 
         /* =========================
@@ -698,164 +629,174 @@
             display: grid;
 
             grid-template-columns:
-                repeat(
-                    4,
-                    1fr
-                );
+                repeat(5, 1fr);
 
-            gap: 16px;
+            gap: 13px;
         }
 
         .feature {
-            min-height: 230px;
+            position: relative;
 
-            padding: 25px;
+            min-height: 190px;
 
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
+            padding: 23px 19px;
 
             background:
                 linear-gradient(
-                    145deg,
+                    160deg,
                     rgba(255,255,255,.055),
                     rgba(255,255,255,.018)
                 );
 
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+
+            overflow: hidden;
+
             transition: .35s ease;
+        }
+
+        .feature::after {
+            content: "";
+
+            position: absolute;
+
+            width: 90px;
+            height: 90px;
+
+            left: -30px;
+            bottom: -30px;
+
+            background: var(--gold);
+
+            opacity: .08;
+
+            filter: blur(35px);
+
+            border-radius: 50%;
         }
 
         .feature:hover {
             transform: translateY(-8px);
 
-            border-color: var(--gold-border);
+            border-color: var(--gold-line);
 
             background:
                 linear-gradient(
-                    145deg,
-                    rgba(212,174,90,.09),
+                    160deg,
+                    rgba(201,168,91,.10),
                     rgba(255,255,255,.025)
                 );
-
-            box-shadow:
-                0 22px 50px rgba(0,0,0,.25);
         }
 
         .feature-icon {
-            width: 52px;
-            height: 52px;
+            width: 48px;
+            height: 48px;
 
             display: grid;
             place-items: center;
 
             margin-bottom: 22px;
 
-            border-radius: 16px;
+            color: var(--gold-light);
 
-            background: rgba(212,174,90,.10);
+            background: rgba(201,168,91,.08);
 
-            font-size: 24px;
+            border: 1px solid var(--gold-line);
+            border-radius: 15px;
+
+            font-size: 22px;
         }
 
         .feature h3 {
-            margin-bottom: 10px;
+            color: var(--white);
 
-            font-size: 17px;
+            font-size: 16px;
+
+            margin-bottom: 8px;
         }
 
         .feature p {
             color: var(--muted);
 
-            font-size: 13px;
-            line-height: 1.9;
+            font-size: 12px;
+            line-height: 1.8;
         }
 
         /* =========================
-           QURAN QUOTE
+           QUOTE
         ========================= */
 
-        .quote {
-            position: relative;
-
-            overflow: hidden;
-
-            padding: 65px 30px;
-
-            border: 1px solid var(--gold-border);
-            border-radius: 32px;
-
+        .quote-section {
             text-align: center;
-
-            background:
-                radial-gradient(
-                    circle at center,
-                    rgba(212,174,90,.11),
-                    transparent 65%
-                ),
-
-                rgba(255,255,255,.025);
         }
 
-        .quote::before {
-            content: "﴿";
-
-            position: absolute;
-
-            top: -50px;
-            right: 30px;
-
-            color: rgba(212,174,90,.12);
-
-            font-family: "Amiri", serif;
-            font-size: 180px;
-        }
-
-        .quote::after {
-            content: "﴾";
-
-            position: absolute;
-
-            bottom: -80px;
-            left: 30px;
-
-            color: rgba(212,174,90,.12);
-
-            font-family: "Amiri", serif;
-            font-size: 180px;
-        }
-
-        .quote p {
+        .quote-box {
             position: relative;
-            z-index: 1;
 
             max-width: 850px;
 
             margin: auto;
 
-            color: var(--gold-light);
+            padding: 70px 35px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(201,168,91,.09),
+                    rgba(118,184,157,.045)
+                );
+
+            border: 1px solid var(--gold-line);
+            border-radius: 35px;
+
+            overflow: hidden;
+        }
+
+        .quote-box::before {
+            content: "﴿";
+
+            position: absolute;
+
+            top: -60px;
+            right: 20px;
+
+            color: var(--gold);
+
+            opacity: .09;
+
+            font-family: "Amiri", serif;
+            font-size: 250px;
+        }
+
+        .quote-box h2 {
+            position: relative;
+
+            color: var(--white);
 
             font-family: "Amiri", serif;
 
-            font-size: clamp(25px, 4vw, 40px);
-
-            line-height: 1.8;
+            font-size: clamp(28px, 4vw, 46px);
+            line-height: 1.7;
         }
 
-        .quote small {
+        .quote-box p {
             position: relative;
-            z-index: 1;
 
-            display: block;
+            color: var(--gold-light);
 
-            margin-top: 18px;
+            margin-top: 20px;
 
-            color: var(--muted);
-
-            font-size: 12px;
+            font-size: 14px;
         }
 
         /* =========================
            DOWNLOAD
         ========================= */
+
+        .download-section {
+            padding-bottom: 130px;
+        }
 
         .download-box {
             display: grid;
@@ -863,28 +804,28 @@
             grid-template-columns: 1fr auto;
 
             align-items: center;
+            gap: 40px;
 
-            gap: 30px;
-
-            padding: 38px;
-
-            border: 1px solid var(--border);
-            border-radius: 30px;
+            padding: 48px;
 
             background:
                 linear-gradient(
-                    120deg,
-                    rgba(255,255,255,.055),
-                    rgba(255,255,255,.018)
+                    135deg,
+                    #111a1c,
+                    #11151c
                 );
 
-            box-shadow: var(--shadow);
+            border: 1px solid rgba(118,184,157,.18);
+            border-radius: 32px;
         }
 
         .download-box h2 {
-            margin-bottom: 10px;
+            color: var(--white);
 
-            font-size: 30px;
+            font-size: 32px;
+            font-weight: 900;
+
+            margin-bottom: 12px;
         }
 
         .download-box p {
@@ -893,8 +834,40 @@
             line-height: 1.9;
         }
 
-        .download-button {
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+
             min-width: 190px;
+
+            padding: 17px 25px;
+
+            color: #08100d;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #9ed4b9,
+                    #6cad92
+                );
+
+            border-radius: 15px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 900;
+
+            transition: .3s;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 18px 35px rgba(118,184,157,.17);
         }
 
         /* =========================
@@ -902,9 +875,9 @@
         ========================= */
 
         footer {
-            padding: 35px 0;
+            padding: 32px 0;
 
-            border-top: 1px solid var(--border);
+            border-top: 1px solid var(--line);
 
             color: var(--muted);
 
@@ -918,57 +891,97 @@
         }
 
         /* =========================
+           ANIMATIONS
+        ========================= */
+
+        @keyframes fadeUp {
+
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        @keyframes floatIn {
+
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
+
+            transition:
+                opacity .8s ease,
+                transform .8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* =========================
            RESPONSIVE
         ========================= */
 
         @media (max-width: 950px) {
 
-            .hero-grid {
+            .hero {
                 grid-template-columns: 1fr;
 
-                gap: 45px;
-            }
-
-            .hero-content {
                 text-align: center;
+
+                padding-top: 150px;
             }
 
             .hero-description {
-                margin-right: auto;
                 margin-left: auto;
+                margin-right: auto;
             }
 
             .hero-buttons {
                 justify-content: center;
             }
 
-            .preview-area {
-                min-height: 570px;
-            }
-
             .features {
                 grid-template-columns:
-                    repeat(
-                        2,
-                        1fr
-                    );
+                    repeat(2, 1fr);
             }
 
-            .floating-card:first-of-type {
-                right: 4%;
+            .download-box {
+                grid-template-columns: 1fr;
+
+                text-align: center;
             }
 
-            .floating-card:last-of-type {
-                left: 4%;
+            .download-btn {
+                margin: auto;
             }
+
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 650px) {
 
             .container {
                 width: min(
-                    100% - 24px,
-                    500px
+                    100% - 28px,
+                    560px
                 );
             }
 
@@ -976,53 +989,31 @@
                 display: none;
             }
 
-            .brand {
-                font-size: 20px;
-            }
-
-            .brand img {
-                width: 42px;
-                height: 42px;
+            h1 {
+                font-size: 53px;
+                letter-spacing: -2px;
             }
 
             .hero {
-                padding-top: 125px;
-            }
+                min-height: auto;
 
-            h1 {
-                font-size: 43px;
-                letter-spacing: -1px;
+                padding-top: 130px;
+                padding-bottom: 80px;
+
+                gap: 60px;
             }
 
             .hero-description {
                 font-size: 15px;
             }
 
-            .preview-area {
-                min-height: 535px;
-            }
-
             .phone {
-                width: 250px;
-                min-height: 490px;
+                width: 265px;
+                height: 535px;
             }
 
-            .phone-screen {
-                min-height: 464px;
-            }
-
-            .floating-card {
-                transform: scale(.85);
-            }
-
-            .floating-card:first-of-type {
-                top: 45px;
-                right: -12px;
-            }
-
-            .floating-card:last-of-type {
-                bottom: 30px;
-                left: -12px;
+            section {
+                padding: 75px 0;
             }
 
             .features {
@@ -1030,24 +1021,17 @@
             }
 
             .feature {
-                min-height: auto;
+                min-height: 160px;
             }
 
             .download-box {
-                grid-template-columns: 1fr;
-
-                padding: 28px 22px;
-
-                text-align: center;
+                padding: 30px 22px;
             }
 
-            .download-button {
-                width: 100%;
+            .download-box h2 {
+                font-size: 25px;
             }
 
-            section {
-                padding: 80px 0;
-            }
         }
 
     </style>
@@ -1055,245 +1039,170 @@
 
 <body>
 
-<div class="ambient">
-    <span></span>
-    <span></span>
-</div>
+<nav id="navbar">
 
-<!-- =========================
-     NAVBAR
-========================= -->
+    <div class="container nav-inner">
 
-<nav class="navbar" id="navbar">
+        <a class="brand" href="#top">
 
-    <div class="container nav-content">
+            <img src="icon.png" alt="سكينة">
 
-        <a href="#" class="brand">
-
-            <img src="icon.png" alt="شعار سكينة">
-
-            <span>سَكينة</span>
+            <span>سكينة</span>
 
         </a>
 
         <div class="nav-links">
 
-            <a href="#features">
-                المميزات
-            </a>
+            <a href="#features">المميزات</a>
 
-            <a href="#about">
-                عن سكينة
-            </a>
+            <a href="#about">عن سكينة</a>
 
-            <a href="#download">
-                التحميل
+            <a href="#download" class="nav-download">
+                تحميل التطبيق
             </a>
 
         </div>
-
-        <a href="#download" class="nav-download">
-            تحميل التطبيق ↓
-        </a>
 
     </div>
 
 </nav>
 
+<main id="top">
 
-<!-- =========================
-     HERO
-========================= -->
+    <!-- =========================
+         HERO
+    ========================= -->
 
-<main>
+    <section class="container hero">
 
-    <section class="hero">
+        <div class="hero-content">
 
-        <div class="container hero-grid">
+            <div class="eyebrow">
 
-            <div class="hero-content">
+                <span></span>
 
-                <div class="eyebrow">
-                    رفيقك اليومي للطمأنينة
-                </div>
-
-                <h1>
-
-                    كل ما تحتاجه من
-
-                    <span>
-                        قرآن وذكر وطمأنينة
-                    </span>
-
-                </h1>
-
-                <p class="hero-description">
-
-                    سَكينة يجمع لك أهم ما تحتاجه في يومك المسلم
-                    في تجربة هادئة وبسيطة تساعدك على القرب من الله،
-                    أينما كنت وبدون تعقيد.
-
-                </p>
-
-                <div class="hero-buttons">
-
-                    <a href="#download"
-                       class="primary-button">
-
-                        تحميل التطبيق
-                        ↓
-
-                    </a>
-
-                    <a href="#features"
-                       class="secondary-button">
-
-                        اكتشف المميزات
-                        ←
-
-                    </a>
-
-                </div>
+                رفيقك اليومي للطمأنينة
 
             </div>
 
+            <h1>
 
-            <div class="preview-area">
+                كل ما تحتاجه من
 
-                <div class="preview-glow"></div>
+                <strong>
+                    قرآن وذكر وطمأنينة
+                </strong>
 
+            </h1>
 
-                <div class="floating-card">
+            <p class="hero-description">
 
-                    <div class="floating-icon">
-                        🕌
+                سكينة يجمع لك ما تحتاجه في يومك من قرآن كريم،
+                أذكار، أدعية، مواقيت صلاة وأذان،
+                في تجربة هادئة وبسيطة تساعدك على الاقتراب من الله.
+
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#download" class="primary-btn">
+
+                    <span>↓</span>
+
+                    تحميل سكينة
+
+                </a>
+
+                <a href="#features" class="secondary-btn">
+
+                    اكتشف المميزات
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="hero-visual">
+
+            <div class="phone-glow"></div>
+
+            <div class="phone">
+
+                <div class="phone-screen">
+
+                    <div class="phone-notch"></div>
+
+                    <div class="phone-header">
+
+                        <div class="phone-logo">
+
+                            <img src="icon.png" alt="">
+
+                            سكينة
+
+                        </div>
+
+                        <div class="phone-date">
+                            يومك بطمأنينة
+                        </div>
+
                     </div>
 
-                    <div>
+                    <div class="welcome-card">
+
+                        <small>
+                            السلام عليكم ورحمة الله وبركاته
+                        </small>
+
+                        <h3>
+                            أهلاً بك في سكينة
+                        </h3>
+
+                    </div>
+
+                    <div class="next-prayer">
 
                         <small>
                             الصلاة القادمة
                         </small>
 
                         <strong>
-                            العصر • متبقي 01:24:38
+                            العصر 🌤️
                         </strong>
 
-                    </div>
-
-                </div>
-
-
-                <div class="phone">
-
-                    <div class="phone-screen">
-
-                        <div class="phone-top">
-
-                            <span>
-                                12:45
-                            </span>
-
-                            <span class="phone-brand">
-                                سَكينة
-                            </span>
-
-                        </div>
-
-
-                        <div class="prayer-card">
-
-                            <div class="prayer-label">
-                                الصلاة القادمة
-                            </div>
-
-                            <div class="prayer-name">
-                                العصر 🌤️
-                            </div>
-
-                            <div class="prayer-time">
-                                موعد الصلاة: 04:35 م
-                            </div>
-
-                            <div class="countdown">
-                                ⏳ متبقي 01:24:38
-                            </div>
-
-                        </div>
-
-
-                        <div class="mini-list">
-
-                            <div class="mini-item">
-
-                                <span>
-                                    الفجر
-                                </span>
-
-                                <strong>
-                                    04:20 ص
-                                </strong>
-
-                            </div>
-
-                            <div class="mini-item">
-
-                                <span>
-                                    الظهر
-                                </span>
-
-                                <strong>
-                                    01:00 م
-                                </strong>
-
-                            </div>
-
-                            <div class="mini-item">
-
-                                <span>
-                                    المغرب
-                                </span>
-
-                                <strong>
-                                    07:45 م
-                                </strong>
-
-                            </div>
-
-                            <div class="mini-item">
-
-                                <span>
-                                    العشاء
-                                </span>
-
-                                <strong>
-                                    09:15 م
-                                </strong>
-
-                            </div>
-
-                        </div>
+                        <span>
+                            متبقي 01:24:36
+                        </span>
 
                     </div>
 
-                </div>
+                    <div class="prayer-list">
 
+                        <div class="prayer-item">
+                            <span>الفجر 🌙</span>
+                            <strong>04:25 ص</strong>
+                        </div>
 
-                <div class="floating-card">
+                        <div class="prayer-item">
+                            <span>الظهر ☀️</span>
+                            <strong>01:02 م</strong>
+                        </div>
 
-                    <div class="floating-icon">
-                        📖
-                    </div>
+                        <div class="prayer-item">
+                            <span>العصر 🌤️</span>
+                            <strong>04:38 م</strong>
+                        </div>
 
-                    <div>
+                        <div class="prayer-item">
+                            <span>المغرب 🌇</span>
+                            <strong>08:01 م</strong>
+                        </div>
 
-                        <small>
-                            وردك اليومي
-                        </small>
-
-                        <strong>
-                            قرآن • أذكار • أدعية
-                        </strong>
+                        <div class="prayer-item">
+                            <span>العشاء 🌙</span>
+                            <strong>09:32 م</strong>
+                        </div>
 
                     </div>
 
@@ -1305,7 +1214,6 @@
 
     </section>
 
-
     <!-- =========================
          FEATURES
     ========================= -->
@@ -1314,27 +1222,25 @@
 
         <div class="container">
 
-            <div class="section-heading">
+            <div class="section-heading reveal">
 
-                <small>
-                    تجربة واحدة لكل يومك
-                </small>
+                <span>كل ما تحتاجه في مكان واحد</span>
 
                 <h2>
-                    كل ما تحتاجه في مكان واحد
+                    أدوات بسيطة تساعدك
+                    على يوم أكثر طمأنينة
                 </h2>
 
                 <p>
-                    صُمم سَكينة ليكون بسيطًا وهادئًا وسهل الاستخدام،
-                    بدون زحمة أو تعقيد.
+                    صممنا سكينة ليكون قريبًا منك في كل وقت،
+                    بدون تعقيد وبدون تشتيت.
                 </p>
 
             </div>
 
-
             <div class="features">
 
-                <div class="feature">
+                <div class="feature reveal">
 
                     <div class="feature-icon">
                         📖
@@ -1345,32 +1251,28 @@
                     </h3>
 
                     <p>
-                        اقرأ واستمع إلى القرآن الكريم
-                        في تجربة هادئة ومريحة.
+                        استمع إلى القرآن الكريم مع مجموعة من القراء.
                     </p>
 
                 </div>
 
-
-                <div class="feature">
+                <div class="feature reveal">
 
                     <div class="feature-icon">
-                        🤲
+                        🌙
                     </div>
 
                     <h3>
-                        الأذكار والأدعية
+                        الأذكار
                     </h3>
 
                     <p>
-                        أذكار الصباح والمساء والنوم
-                        وأدعية تساعدك على المحافظة على وردك اليومي.
+                        أذكار الصباح والمساء والنوم لتبقى قريبًا من الذكر.
                     </p>
 
                 </div>
 
-
-                <div class="feature">
+                <div class="feature reveal">
 
                     <div class="feature-icon">
                         🕌
@@ -1381,26 +1283,39 @@
                     </h3>
 
                     <p>
-                        مواقيت صلاة دقيقة حسب موقعك
-                        مع تنبيهات الأذان.
+                        مواقيت صلاة دقيقة وأذان يساعدك على المحافظة على صلاتك.
                     </p>
 
                 </div>
 
+                <div class="feature reveal">
 
-                <div class="feature">
+                    <div class="feature-icon">
+                        🤲
+                    </div>
+
+                    <h3>
+                        الأدعية
+                    </h3>
+
+                    <p>
+                        مجموعة من الأدعية التي تحتاجها في مختلف أوقاتك.
+                    </p>
+
+                </div>
+
+                <div class="feature reveal">
 
                     <div class="feature-icon">
                         📿
                     </div>
 
                     <h3>
-                        السبحة والطمأنينة
+                        السبحة
                     </h3>
 
                     <p>
-                        أدوات بسيطة تساعدك على الذكر
-                        والقرب من الله في أي وقت.
+                        سبحة رقمية بسيطة تساعدك على التسبيح في أي وقت.
                     </p>
 
                 </div>
@@ -1410,25 +1325,24 @@
         </div>
 
     </section>
-
 
     <!-- =========================
          QUOTE
     ========================= -->
 
-    <section id="about">
+    <section id="about" class="quote-section">
 
         <div class="container">
 
-            <div class="quote">
+            <div class="quote-box reveal">
+
+                <h2>
+                    ألا بذكر الله تطمئن القلوب
+                </h2>
 
                 <p>
-                    ألا بذكر الله تطمئن القلوب
+                    سكينة — لأن الطمأنينة تبدأ بخطوة.
                 </p>
-
-                <small>
-                    سَكينة — لحظات أقرب إلى الله
-                </small>
 
             </div>
 
@@ -1436,38 +1350,38 @@
 
     </section>
 
-
     <!-- =========================
          DOWNLOAD
     ========================= -->
 
-    <section id="download">
+    <section id="download" class="download-section">
 
         <div class="container">
 
-            <div class="download-box">
+            <div class="download-box reveal">
 
                 <div>
 
                     <h2>
-                        خليك أقرب إلى الطمأنينة
+                        خذ سكينة معك أينما ذهبت
                     </h2>
 
                     <p>
-                        حمّل تطبيق سَكينة وابدأ يومك بقرآن،
-                        وذكر، وصلاة، وطمأنينة.
+                        حمّل التطبيق وابدأ يومك بالقرب من القرآن والذكر.
                     </p>
 
                 </div>
 
+                <!--
+                    غيّر الرابط الموجود هنا لاحقًا
+                    إلى رابط تحميل APK المباشر
+                -->
 
-                <!-- غيّر الرابط هنا بعد رفع التطبيق -->
+                <a href="#" class="download-btn">
 
-                <a href="#"
-                   class="primary-button download-button">
-
-                    تحميل سَكينة
                     ↓
+
+                    تحميل التطبيق
 
                 </a>
 
@@ -1479,39 +1393,30 @@
 
 </main>
 
-
-<!-- =========================
-     FOOTER
-========================= -->
-
 <footer>
 
-    <div class="container">
+    © 2026
 
-        <p>
-            © 2026
-            <strong>
-                سَكينة
-            </strong>
+    <strong>
+        سكينة
+    </strong>
 
-            — كل ما تحتاجه من قرآن وذكر وطمأنينة
-        </p>
-
-    </div>
+    — كل ما تحتاجه من قرآن وذكر وطمأنينة
 
 </footer>
 
-
 <script>
 
+    /* =========================
+       NAVBAR SCROLL
+    ========================= */
+
     const navbar =
-        document.getElementById(
-            "navbar"
-        );
+        document.getElementById("navbar");
 
     window.addEventListener(
         "scroll",
-        function () {
+        () => {
 
             if (
                 window.scrollY > 30
@@ -1532,7 +1437,57 @@
         }
     );
 
+    /* =========================
+       REVEAL ANIMATION
+    ========================= */
+
+    const revealElements =
+        document.querySelectorAll(
+            ".reveal"
+        );
+
+    const revealObserver =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(
+                    entry => {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            entry.target.classList.add(
+                                "active"
+                            );
+
+                            revealObserver.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    }
+                );
+
+            },
+            {
+                threshold: .12
+            }
+        );
+
+    revealElements.forEach(
+        element => {
+
+            revealObserver.observe(
+                element
+            );
+
+        }
+    );
+
 </script>
 
 </body>
+
 </html>
