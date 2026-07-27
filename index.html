@@ -9,7 +9,7 @@
     <meta name="description"
           content="سكينة — كل ما تحتاجه من قرآن وذكر وطمأنينة، في تجربة إسلامية هادئة وبسيطة.">
 
-    <meta name="theme-color" content="#0b1212">
+    <meta name="theme-color" content="#08100f">
 
     <link rel="icon" type="image/png" href="./icon.png">
 
@@ -48,6 +48,7 @@
 
         html {
             scroll-behavior: smooth;
+            background-color: #08100f; /* لحل مشكلة الوميض الأبيض تماماً أثناء التمرير */
         }
 
         body {
@@ -58,7 +59,8 @@
 
             font-family: "Cairo", sans-serif;
 
-            background:
+            background-color: #08100f;
+            background-image:
                 radial-gradient(
                     circle at 85% 0%,
                     rgba(214,182,106,.12),
@@ -77,9 +79,10 @@
                     #0b1413 45%,
                     #08100f 100%
                 );
+            background-attachment: fixed; /* يمنع أي وميض أبيض ويجعل التمرير ثابتاً وسلساً */
         }
 
-        /* نقوش إسلامية هندسية مع تأثير بلور خفيف ومريح للعين */
+        /* نقوش إسلامية هندسية جديدة كلياً بنمط نجوم وثمانيات إسلامية هادئة */
         body::before {
             content: "";
             position: fixed;
@@ -87,14 +90,17 @@
 
             pointer-events: none;
 
-            opacity: .05;
+            opacity: .045;
 
-            background-image:
-                radial-gradient(circle at 50% 50%, var(--gold) 1px, transparent 1px),
-                linear-gradient(30deg, #ffffff 12%, transparent 12.5%, transparent 87%, #ffffff 87.5%),
-                linear-gradient(150deg, #ffffff 12%, transparent 12.5%, transparent 87%, #ffffff 87.5%);
+            background-image: 
+                radial-gradient(circle at 100% 50%, transparent 20%, #d6b66a 21%, #d6b66a 34%, transparent 35%, transparent),
+                radial-gradient(circle at 0% 50%, transparent 20%, #d6b66a 21%, #d6b66a 34%, transparent 35%, transparent),
+                linear-gradient(45deg, rgba(255,255,255,.05) 25%, transparent 25%), 
+                linear-gradient(-45deg, rgba(255,255,255,.05) 25%, transparent 25%);
 
-            background-size: 60px 60px, 74px 128px, 74px 128px;
+            background-size: 80px 80px;
+            background-position: 0 0, 0 0, 40px 0, 0 40px;
+            
             backdrop-filter: blur(1px);
             -webkit-backdrop-filter: blur(1px);
 
@@ -483,7 +489,6 @@
             font-size: 13px;
         }
 
-        /* تعديل كارت العرض ليشمل جميع المميزات وليست الصلاة فقط */
         .features-preview-card {
             position: relative;
 
@@ -1141,7 +1146,6 @@
 
                     </div>
 
-                    <!-- تم تحديث الكارت ليعرض جميع مميزات التطبيق -->
                     <div class="features-preview-card">
 
                         <div class="features-preview-title">
