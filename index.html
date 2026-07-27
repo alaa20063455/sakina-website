@@ -79,11 +79,7 @@
                 );
         }
 
-        /*
-         * زخرفة إسلامية خفيفة جدًا وثابتة
-         * بدون animation ثقيل أثناء الـ scroll
-         */
-
+        /* نقوش إسلامية هندسية مع تأثير بلور خفيف ومريح للعين */
         body::before {
             content: "";
             position: fixed;
@@ -91,25 +87,16 @@
 
             pointer-events: none;
 
-            opacity: .035;
+            opacity: .05;
 
             background-image:
-                linear-gradient(
-                    30deg,
-                    #ffffff 12%,
-                    transparent 12.5%,
-                    transparent 87%,
-                    #ffffff 87.5%
-                ),
-                linear-gradient(
-                    150deg,
-                    #ffffff 12%,
-                    transparent 12.5%,
-                    transparent 87%,
-                    #ffffff 87.5%
-                );
+                radial-gradient(circle at 50% 50%, var(--gold) 1px, transparent 1px),
+                linear-gradient(30deg, #ffffff 12%, transparent 12.5%, transparent 87%, #ffffff 87.5%),
+                linear-gradient(150deg, #ffffff 12%, transparent 12.5%, transparent 87%, #ffffff 87.5%);
 
-            background-size: 74px 128px;
+            background-size: 60px 60px, 74px 128px, 74px 128px;
+            backdrop-filter: blur(1px);
+            -webkit-backdrop-filter: blur(1px);
 
             z-index: -1;
         }
@@ -125,7 +112,7 @@
         }
 
         /* =========================
-           NAVBAR
+            NAVBAR
         ========================= */
 
         nav {
@@ -219,7 +206,7 @@
         }
 
         /* =========================
-           HERO
+            HERO
         ========================= */
 
         .hero {
@@ -273,11 +260,11 @@
         h1 {
             max-width: 680px;
 
-            font-size: clamp(43px, 6vw, 78px);
+            font-size: clamp(40px, 5.5vw, 72px);
 
-            line-height: 1.12;
+            line-height: 1.25;
 
-            letter-spacing: -2px;
+            letter-spacing: -1px;
 
             font-weight: 900;
         }
@@ -285,7 +272,7 @@
         h1 .highlight {
             display: block;
 
-            margin-top: 10px;
+            margin-top: 14px;
 
             color: var(--gold-light);
 
@@ -381,7 +368,7 @@
         }
 
         /* =========================
-           HERO VISUAL
+            HERO VISUAL
         ========================= */
 
         .hero-visual {
@@ -496,7 +483,8 @@
             font-size: 13px;
         }
 
-        .prayer-card {
+        /* تعديل كارت العرض ليشمل جميع المميزات وليست الصلاة فقط */
+        .features-preview-card {
             position: relative;
 
             margin-top: 22px;
@@ -513,49 +501,45 @@
                     rgba(121,188,160,.08),
                     rgba(255,255,255,.025)
                 );
-
-            /*
-             * مهم:
-             * الكارت مستقيم وليس مائلاً
-             */
-            transform: none;
         }
 
-        .prayer-card-title {
+        .features-preview-title {
             display: flex;
             align-items: center;
             justify-content: space-between;
 
-            margin-bottom: 18px;
+            margin-bottom: 16px;
         }
 
-        .prayer-card-title span:first-child {
+        .features-preview-title span:first-child {
             color: var(--green-light);
 
             font-weight: 800;
         }
 
-        .prayer-card-title span:last-child {
+        .features-preview-title span:last-child {
             color: var(--muted);
 
             font-size: 12px;
         }
 
-        .prayer-list {
+        .features-preview-grid {
             display: grid;
 
             grid-template-columns:
-                repeat(3, 1fr);
+                repeat(2, 1fr);
 
             gap: 10px;
         }
 
-        .prayer-item {
-            padding: 13px 8px;
+        .feature-preview-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
 
-            text-align: center;
+            padding: 12px;
 
-            border-radius: 15px;
+            border-radius: 14px;
 
             background: rgba(255,255,255,.045);
 
@@ -564,28 +548,38 @@
                 transform .2s ease;
         }
 
-        .prayer-item:hover {
+        .feature-preview-item:hover {
             transform: translateY(-2px);
 
             background: rgba(255,255,255,.08);
         }
 
-        .prayer-item span {
-            display: block;
+        .feature-preview-icon {
+            display: grid;
+            place-items: center;
 
-            color: var(--muted);
+            width: 32px;
+            height: 32px;
 
-            font-size: 11px;
+            border-radius: 10px;
+
+            background: rgba(214,182,106,.12);
+            color: var(--gold-light);
+            font-size: 14px;
         }
 
-        .prayer-item strong {
+        .feature-preview-item div span {
             display: block;
-
-            margin-top: 5px;
-
             color: var(--white);
+            font-size: 13px;
+            font-weight: 700;
+        }
 
-            font-size: 14px;
+        .feature-preview-item div small {
+            display: block;
+            color: var(--muted);
+            font-size: 11px;
+            margin-top: 2px;
         }
 
         .app-card-bottom {
@@ -621,7 +615,7 @@
         }
 
         /* =========================
-           FEATURES
+            FEATURES
         ========================= */
 
         .section {
@@ -740,7 +734,7 @@
         }
 
         /* =========================
-           QUOTE
+            QUOTE
         ========================= */
 
         .quote-section {
@@ -810,7 +804,7 @@
         }
 
         /* =========================
-           DOWNLOAD
+            DOWNLOAD
         ========================= */
 
         .download-section {
@@ -886,7 +880,7 @@
         }
 
         /* =========================
-           FOOTER
+            FOOTER
         ========================= */
 
         footer {
@@ -902,7 +896,7 @@
         }
 
         /* =========================
-           ANIMATIONS
+            ANIMATIONS
         ========================= */
 
         @keyframes fadeUp {
@@ -928,11 +922,6 @@
             }
         }
 
-        /*
-         * لا نستخدم scroll animations كثيرة
-         * لتجنب التقطيع والـ white flash
-         */
-
         @media (prefers-reduced-motion: reduce) {
 
             *,
@@ -946,7 +935,7 @@
         }
 
         /* =========================
-           MOBILE
+            MOBILE
         ========================= */
 
         @media (max-width: 850px) {
@@ -1014,9 +1003,9 @@
             }
 
             h1 {
-                font-size: 47px;
+                font-size: 38px;
 
-                letter-spacing: -1.5px;
+                letter-spacing: -1px;
             }
 
             .hero-description {
@@ -1036,9 +1025,8 @@
                 border-radius: 27px;
             }
 
-            .prayer-list {
-                grid-template-columns:
-                    repeat(2, 1fr);
+            .features-preview-grid {
+                grid-template-columns: 1fr;
             }
 
             .download-box {
@@ -1094,21 +1082,14 @@
                 </div>
 
                 <h1>
-
                     كل ما تحتاجه
-
                     <span class="highlight">
                         من قرآن وذكر وطمأنينة
                     </span>
-
                 </h1>
 
                 <p class="hero-description">
-
-                    سكينة تجمع لك ما تحتاجه في يومك من القرآن،
-                    الأذكار، الأدعية، مواقيت الصلاة والأذان،
-                    في تجربة هادئة صُممت لتكون قريبة منك كل يوم.
-
+                    سكينة تجمع لك ما تحتاجه في يومك من القرآن، الأذكار، الأدعية، مواقيت الصلاة والأذان، في تجربة هادئة صُممت لتكون قريبة منك كل يوم.
                 </p>
 
                 <div class="hero-actions">
@@ -1148,7 +1129,6 @@
                         >
 
                         <div>
-
                             <h3>
                                 سكينة
                             </h3>
@@ -1161,50 +1141,46 @@
 
                     </div>
 
-                    <div class="prayer-card">
+                    <!-- تم تحديث الكارت ليعرض جميع مميزات التطبيق -->
+                    <div class="features-preview-card">
 
-                        <div class="prayer-card-title">
-
-                            <span>
-                                مواقيت الصلاة
-                            </span>
-
-                            <span>
-                                يومك بطمأنينة
-                            </span>
-
+                        <div class="features-preview-title">
+                            <span>مميزات التطبيق</span>
+                            <span>تجربة متكاملة</span>
                         </div>
 
-                        <div class="prayer-list">
+                        <div class="features-preview-grid">
 
-                            <div class="prayer-item">
-                                <span>الفجر</span>
-                                <strong>04:15 ص</strong>
+                            <div class="feature-preview-item">
+                                <div class="feature-preview-icon">☾</div>
+                                <div>
+                                    <span>القرآن الكريم</span>
+                                    <small>قراءة واستماع هادئ</small>
+                                </div>
                             </div>
 
-                            <div class="prayer-item">
-                                <span>الظهر</span>
-                                <strong>01:01 م</strong>
+                            <div class="feature-preview-item">
+                                <div class="feature-preview-icon">✦</div>
+                                <div>
+                                    <span>الأذكار والأدعية</span>
+                                    <small>حصن المسلم اليومي</small>
+                                </div>
                             </div>
 
-                            <div class="prayer-item">
-                                <span>العصر</span>
-                                <strong>04:40 م</strong>
+                            <div class="feature-preview-item">
+                                <div class="feature-preview-icon">◷</div>
+                                <div>
+                                    <span>مواقيت الصلاة</span>
+                                    <small>حسب موقعك الجغرافي</small>
+                                </div>
                             </div>
 
-                            <div class="prayer-item">
-                                <span>المغرب</span>
-                                <strong>08:02 م</strong>
-                            </div>
-
-                            <div class="prayer-item">
-                                <span>العشاء</span>
-                                <strong>09:35 م</strong>
-                            </div>
-
-                            <div class="prayer-item">
-                                <span>التالي</span>
-                                <strong>العصر</strong>
+                            <div class="feature-preview-item">
+                                <div class="feature-preview-icon">◉</div>
+                                <div>
+                                    <span>السبحة الرقمية</span>
+                                    <small>تسبيح مرن وسهل</small>
+                                </div>
                             </div>
 
                         </div>
@@ -1214,7 +1190,7 @@
                     <div class="app-card-bottom">
 
                         <span class="status">
-                            مواقيتك محفوظة
+                            بياناتك محفوظة وآمنة
                         </span>
 
                         <span>
@@ -1251,8 +1227,7 @@
                 </h2>
 
                 <p>
-                    صُممت سكينة لتكون جزءًا طبيعيًا من يومك،
-                    بدون تعقيد أو ازدحام.
+                    صُممت سكينة لتكون جزءًا طبيعيًا من يومك، بدون تعقيد أو ازدحام.
                 </p>
 
             </div>
@@ -1270,8 +1245,7 @@
                     </h3>
 
                     <p>
-                        اقرأ واستمع إلى القرآن الكريم
-                        في تجربة هادئة ومريحة.
+                        اقرأ واستمع إلى القرآن الكريم في تجربة هادئة ومريحة.
                     </p>
 
                 </div>
@@ -1287,8 +1261,7 @@
                     </h3>
 
                     <p>
-                        أذكارك اليومية وأدعيتك
-                        في متناول يدك وقتما تحتاجها.
+                        أذكارك اليومية وأدعيتك في متناول يدك وقتما تحتاجها.
                     </p>
 
                 </div>
@@ -1304,8 +1277,7 @@
                     </h3>
 
                     <p>
-                        مواقيت دقيقة حسب موقعك
-                        مع تنبيهات الأذان.
+                        مواقيت دقيقة حسب موقعك مع تنبيهات الأذان.
                     </p>
 
                 </div>
@@ -1321,8 +1293,7 @@
                     </h3>
 
                     <p>
-                        احتفظ بمواقيتك وبياناتك
-                        لتظل تجربتك مستمرة.
+                        احتفظ بمواقيتك وبياناتك لتظل تجربتك مستمرة.
                     </p>
 
                 </div>
@@ -1338,8 +1309,7 @@
                     </h3>
 
                     <p>
-                        تسبيح بسيط وسهل
-                        في أي وقت ومكان.
+                        تسبيح بسيط وسهل في أي وقت ومكان.
                     </p>
 
                 </div>
@@ -1355,8 +1325,7 @@
                     </h3>
 
                     <p>
-                        ألوان مريحة وتجربة
-                        تساعدك على التركيز والسكينة.
+                        ألوان مريحة وتجربة تساعدك على التركيز والسكينة.
                     </p>
 
                 </div>
@@ -1405,13 +1374,8 @@
                 </h2>
 
                 <p>
-                    ابدأ يومك بقلب أهدأ،
-                    وكن أقرب إلى القرآن والذكر والطمأنينة.
+                    ابدأ يومك بقلب أهدأ، وكن أقرب إلى القرآن والذكر والطمأنينة.
                 </p>
-
-                <!--
-                    ضع رابط تحميل APK هنا لاحقًا
-                -->
 
                 <a
                     href="#"
@@ -1436,11 +1400,6 @@
 </footer>
 
 <script>
-
-    /*
-     * Navbar خفيف جدًا
-     * لا يوجد scroll animation تقيل
-     */
 
     const navbar =
         document.getElementById("navbar");
